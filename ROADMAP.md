@@ -44,6 +44,7 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 - `ActiveSupport::Deprecation` infrastructure for future breaking changes
 - Full YARD documentation on public classes
 - Compatibility matrix finalized (Rails 7.1 / 8.x, Ruby 3.3 / 3.4 / 4.0)
+- Documentation audit: review and finalize README, add `CONTRIBUTING.md`, update ROADMAP to reflect no future planned milestones with links for bug reports, feature requests, and contribution guidelines
 
 ---
 
