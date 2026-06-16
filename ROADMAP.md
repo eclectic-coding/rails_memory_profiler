@@ -10,15 +10,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 > Goal: a developer can add the gem, mount the engine, and immediately see per-request allocation data without any other setup.
 
-**Dashboard UI**
-- `ReportsController < ActionController::Base` — `index` (HTML + JSON), `show` (per-request drilldown)
-- Layout — standalone `app/views/layouts/rails_memory_profiler/application.html.erb` with `inline_styles` helper and importmap tags (matches QueryOwl pattern)
-- Index view — sortable table: path, controller#action, allocated objects, allocated bytes, retained objects, timestamp
-- Show view — full `MemoryProfiler.report` breakdown for that request: top allocating lines, top allocating gems, top allocating classes
-- Stimulus controller — client-side filter by controller name
-- Inline CSS via `_*.css` partials in `app/assets/stylesheets/rails_memory_profiler/` (no asset pipeline dependency)
-- `check_dashboard_enabled` guard — returns `403` unless `config.dashboard_enabled`
-
 **Developer experience**
 - `rails generate rails_memory_profiler:install` — copies `config/initializers/rails_memory_profiler.rb` with all options documented
 - Routes: `mount RailsMemoryProfiler::Engine, at: "/rails/memory"`
