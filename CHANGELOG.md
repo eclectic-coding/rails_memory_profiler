@@ -20,3 +20,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `ApplicationHelper` — `inline_styles`, `sort_th`, `allocation_badge`
 - Stimulus `filter_controller` — client-side controller-name filter with clear button
 - Five CSS partials in `app/assets/stylesheets/rails_memory_profiler/`
+- `rails generate rails_memory_profiler:install` — creates `config/initializers/rails_memory_profiler.rb` with all options documented and prints mount instructions
+- README rewritten with installation, mount, configuration table, and dashboard description
