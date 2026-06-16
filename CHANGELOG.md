@@ -22,3 +22,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Five CSS partials in `app/assets/stylesheets/rails_memory_profiler/`
 - `rails generate rails_memory_profiler:install` — creates `config/initializers/rails_memory_profiler.rb` with all options documented and prints mount instructions
 - README rewritten with installation, mount, configuration table, and dashboard description
+- Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed

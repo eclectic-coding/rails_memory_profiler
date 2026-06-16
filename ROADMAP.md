@@ -10,12 +10,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 > Goal: a developer can add the gem, mount the engine, and immediately see per-request allocation data without any other setup.
 
-**Gem hygiene**
-- `required_ruby_version >= 3.3`
-- Add `memory_profiler`, `importmap-rails`, `turbo-rails` as dependencies
-- Fill gemspec `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri`
-- Remove `allowed_push_host` TODO guard to enable RubyGems publish
-
 ---
 
 ## 0.2.0 — Richer reports
