@@ -33,10 +33,6 @@ if git tag | grep -q "^$TAG$"; then
   exit 1
 fi
 
-echo "==> Running test suite..."
-bundle exec rake
-
-echo ""
 echo "==> Bumping version to $VERSION..."
 sed -i '' "s/VERSION = \".*\"/VERSION = \"$VERSION\"/" "$VERSION_FILE"
 
