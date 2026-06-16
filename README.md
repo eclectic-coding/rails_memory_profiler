@@ -1,4 +1,12 @@
 # RailsMemoryProfiler
+
+[![CI](https://github.com/eclectic-coding/rails_memory_profiler/actions/workflows/main.yml/badge.svg)](https://github.com/eclectic-coding/rails_memory_profiler/actions/workflows/main.yml)
+[![Gem Version](https://img.shields.io/gem/v/rails_memory_profiler)](https://rubygems.org/gems/rails_memory_profiler)
+[![Gem Downloads](https://img.shields.io/gem/dt/rails_memory_profiler)](https://rubygems.org/gems/rails_memory_profiler)
+[![Ruby](https://img.shields.io/badge/ruby-%3E%3D%203.3-CC342D?logo=ruby&logoColor=white)](https://www.ruby-lang.org)
+[![Rails](https://img.shields.io/badge/rails-%3E%3D%208.1-CC0000?logo=rubyonrails&logoColor=white)](https://rubyonrails.org)
+[![codecov](https://codecov.io/gh/eclectic-coding/rails_memory_profiler/branch/main/graph/badge.svg)](https://codecov.io/gh/eclectic-coding/rails_memory_profiler)
+
 Short description and motivation.
 
 ## Usage

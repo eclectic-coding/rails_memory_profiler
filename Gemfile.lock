@@ -2,7 +2,7 @@ PATH
   remote: .
   specs:
     rails_memory_profiler (0.1.0)
-      rails (>= 8.1.3)
+      rails (>= 7.1)
 
 GEM
   remote: https://rubygems.org/
