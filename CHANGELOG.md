@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] — Core (in progress)
-
 ### Added
 - `Configuration` — `enabled`, `sample_rate`, `store_size`, `dashboard_enabled`, `min_allocated_objects`, `ignore_paths`, `ignore_controllers`
 - `Middleware` — wraps each request; uses `GC.stat` diff to capture `allocated_objects` and `retained_objects` per request; supports path/controller ignoring and request sampling
