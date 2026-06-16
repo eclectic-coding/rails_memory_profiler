@@ -1,0 +1,14 @@
+comment:
+  layout: "reach, diff, flags, files"
+  behavior: default
+  # Only post or update the comment if the coverage drops
+  require_changes: "coverage_drop"
+
+coverage:
+  status:
+    project:
+      default:
+        informational: false
+    patch:
+      default:
+        informational: false
