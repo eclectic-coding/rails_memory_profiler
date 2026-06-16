@@ -11,6 +11,18 @@ Per-request memory allocation reports with a mountable dashboard UI. Fills the g
 
 A Rack middleware captures object allocations for every request using `GC.stat` diffs. Results are stored in a thread-safe ring buffer and served through a mountable engine with a sortable, filterable dashboard.
 
+---
+
+## Table of Contents
+
+- [Installation](#installation)
+- [Dashboard](#dashboard)
+- [Configuration](#configuration)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
 ## Installation
 
 Add to your Gemfile:
@@ -35,6 +47,10 @@ mount RailsMemoryProfiler::Engine, at: "/rails/memory"
 
 Then visit `/rails/memory/reports` to see per-request allocation data.
 
+[↑ Back to top](#railsmemoryprofiler)
+
+---
+
 ## Dashboard
 
 The index view shows a sortable table of captured requests. Click any row to open the detail view for that request.
@@ -42,6 +58,10 @@ The index view shows a sortable table of captured requests. Click any row to ope
 Columns: **Path**, **Controller#Action**, **Allocated Objects** (colour-coded), **Retained Objects**, **Duration (ms)**, **Recorded At**.
 
 Use the controller filter to narrow the table down to a specific controller without a page reload.
+
+[↑ Back to top](#railsmemoryprofiler)
+
+---
 
 ## Configuration
 
@@ -61,17 +81,27 @@ Example:
 
 ```ruby
 RailsMemoryProfiler.configure do |config|
-  config.sample_rate        = 5
+  config.sample_rate           = 5
   config.min_allocated_objects = 1_000
-  config.ignore_paths       = ["/rails/memory", "/up"]
-  config.ignore_controllers = ["rails/health"]
+  config.ignore_paths          = ["/rails/memory", "/up"]
+  config.ignore_controllers    = ["rails/health"]
 end
 ```
+
+[↑ Back to top](#railsmemoryprofiler)
+
+---
 
 ## Contributing
 
 Bug reports and pull requests are welcome on [GitHub](https://github.com/eclectic-coding/rails_memory_profiler).
 
+[↑ Back to top](#railsmemoryprofiler)
+
+---
+
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
+
+[↑ Back to top](#railsmemoryprofiler)
