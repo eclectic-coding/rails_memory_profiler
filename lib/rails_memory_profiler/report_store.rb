@@ -4,10 +4,14 @@ module RailsMemoryProfiler
       def push(report)
         mutex.synchronize do
           ensure_buffer_size
-          buffer[@write_pos] = report
+          buffer[@write_pos] = report.merge(id: SecureRandom.hex(6))
           @write_pos = (@write_pos + 1) % capacity
           @stored    = [@stored + 1, capacity].min
         end
+      end
+
+      def find(id)
+        all.find { |r| r[:id] == id }
       end
 
       def all

@@ -1,0 +1,35 @@
+<%= link_to "← All Requests", reports_path, class: "rmp-back" %>
+
+<% if @report %>
+  <div class="rmp-header">
+    <h1><%= @report[:method] %> <%= @report[:path] %></h1>
+    <p>
+      <%= [@report[:controller], @report[:action]].compact.join("#") %>
+      &middot;
+      <%= @report[:recorded_at]&.strftime("%Y-%m-%d %H:%M:%S") %>
+    </p>
+  </div>
+
+  <div class="rmp-detail">
+    <div class="rmp-detail-grid">
+      <div class="rmp-detail-item">
+        <div class="rmp-detail-label">Allocated Objects</div>
+        <div class="rmp-detail-value"><%= number_with_delimiter(@report[:allocated_objects]) %></div>
+      </div>
+      <div class="rmp-detail-item">
+        <div class="rmp-detail-label">Retained Objects</div>
+        <div class="rmp-detail-value"><%= number_with_delimiter(@report[:retained_objects]) %></div>
+      </div>
+      <div class="rmp-detail-item">
+        <div class="rmp-detail-label">Duration</div>
+        <div class="rmp-detail-value"><%= @report[:duration_ms] %> ms</div>
+      </div>
+      <div class="rmp-detail-item">
+        <div class="rmp-detail-label">HTTP Method</div>
+        <div class="rmp-detail-value"><%= @report[:method] %></div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <p class="rmp-empty">Report not found — it may have been evicted from the store.</p>
+<% end %>
