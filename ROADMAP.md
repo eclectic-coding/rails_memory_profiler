@@ -6,11 +6,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
-## 0.1.0 — Usable
-
-> Goal: a developer can add the gem, mount the engine, and immediately see per-request allocation data without any other setup.
-
----
 
 ## 0.2.0 — Richer reports
 

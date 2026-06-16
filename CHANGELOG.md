@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-06-16
+
 ### Added
 - `Configuration` — `enabled`, `sample_rate`, `store_size`, `dashboard_enabled`, `min_allocated_objects`, `ignore_paths`, `ignore_controllers`
 - `Middleware` — wraps each request; uses `GC.stat` diff to capture `allocated_objects` and `retained_objects` per request; supports path/controller ignoring and request sampling
@@ -24,4 +26,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/commits/main/
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.1.0
