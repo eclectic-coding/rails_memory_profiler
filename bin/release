@@ -12,7 +12,7 @@ if [[ -z "$VERSION" ]]; then
 fi
 
 TAG="v$VERSION"
-VERSION_FILE="lib/query_owl/version.rb"
+VERSION_FILE="lib/rails_memory_profiler/version.rb"
 
 # Must be on main
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -43,11 +43,6 @@ sed -i '' "s/VERSION = \".*\"/VERSION = \"$VERSION\"/" "$VERSION_FILE"
 echo "==> Updating Gemfile.lock..."
 bundle install --quiet
 
-echo "==> Updating gemfiles/ lockfiles..."
-for gemfile in gemfiles/*.gemfile; do
-  BUNDLE_GEMFILE="$gemfile" bundle install --quiet
-done
-
 echo "==> Updating CHANGELOG..."
 TODAY=$(date +%Y-%m-%d)
 # Rename [Unreleased] heading to the new version + date
@@ -56,12 +51,12 @@ sed -i '' "s/^## \[Unreleased\]$/## [$VERSION] - $TODAY/" CHANGELOG.md
 awk "/^## \[$VERSION\]/{print \"## [Unreleased]\n\"; print; next}1" CHANGELOG.md > CHANGELOG.tmp && mv CHANGELOG.tmp CHANGELOG.md
 # Update the comparison links at the bottom
 sed -i '' \
-  "s|^\[Unreleased\]:.*|\[Unreleased\]: https://github.com/eclectic-coding/query_owl/compare/$TAG...HEAD|" \
+  "s|^\[Unreleased\]:.*|\[Unreleased\]: https://github.com/eclectic-coding/rails_memory_profiler/compare/$TAG...HEAD|" \
   CHANGELOG.md
 # Insert the new version link after the [Unreleased] link
 sed -i '' \
   "/^\[Unreleased\]:/a\\
-[$VERSION]: https://github.com/eclectic-coding/query_owl/releases/tag/$TAG" \
+[$VERSION]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/$TAG" \
   CHANGELOG.md
 
 echo "==> Pruning shipped ROADMAP section..."
@@ -73,7 +68,7 @@ awk -v ver="$MINOR_VERSION" '
 ' ROADMAP.md > ROADMAP.tmp && mv ROADMAP.tmp ROADMAP.md
 
 echo "==> Committing release..."
-git add "$VERSION_FILE" Gemfile.lock gemfiles/*.gemfile.lock CHANGELOG.md ROADMAP.md
+git add "$VERSION_FILE" Gemfile.lock CHANGELOG.md ROADMAP.md
 git commit -m "Release $TAG"
 
 echo "==> Tagging $TAG..."
@@ -84,4 +79,4 @@ git push origin main
 git push origin "$TAG"
 
 echo "==> Done. CI will build and publish the gem once the tag is picked up."
-echo "    Monitor: https://github.com/eclectic-coding/query_owl/actions"
+echo "    Monitor: https://github.com/eclectic-coding/rails_memory_profiler/actions"
