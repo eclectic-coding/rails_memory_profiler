@@ -10,13 +10,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 > Goal: a developer can add the gem, mount the engine, and immediately see per-request allocation data without any other setup.
 
-**Core**
-- `Configuration` — `enabled`, `sample_rate` (every N requests), `store_size`, `dashboard_enabled`, `min_allocated_objects` threshold, `ignore_paths`, `ignore_controllers`
-- `Middleware` — wraps each request; uses `GC.stat` diff for lightweight per-request totals; captures `allocated_objects`, `allocated_bytes`, `retained_objects`, `retained_bytes`
-- `ReportStore` — thread-safe circular buffer (same pattern as QueryOwl `EventStore`); stores per-request reports up to `store_size`
-- `RequestContext` — captures `controller`, `action`, `path`, `duration_ms` alongside allocation data
-- `Engine` — `isolate_namespace`, importmap + Turbo wiring, middleware registration
-
 **Dashboard UI**
 - `ReportsController < ActionController::Base` — `index` (HTML + JSON), `show` (per-request drilldown)
 - Layout — standalone `app/views/layouts/rails_memory_profiler/application.html.erb` with `inline_styles` helper and importmap tags (matches QueryOwl pattern)
