@@ -3,8 +3,8 @@ require_relative "lib/rails_memory_profiler/version"
 Gem::Specification.new do |spec|
   spec.name        = "rails_memory_profiler"
   spec.version     = RailsMemoryProfiler::VERSION
-  spec.authors     = [ "Chuck Smith" ]
-  spec.email       = [ "eclectic-coding@users.noreply.github.com" ]
+  spec.authors     = ["Chuck Smith"]
+  spec.email       = ["eclectic-coding@users.noreply.github.com"]
   spec.homepage    = "TODO"
   spec.summary     = "TODO: Summary of RailsMemoryProfiler."
   spec.description = "TODO: Description of RailsMemoryProfiler."
