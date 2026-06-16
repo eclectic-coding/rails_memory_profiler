@@ -4,9 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 gem "puma"
-
 gem "sqlite3"
-
 gem "propshaft"
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
