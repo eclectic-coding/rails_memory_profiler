@@ -1,0 +1,58 @@
+.rmp-filters {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 0.6rem 1rem;
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.rmp-filters label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+  color: var(--muted);
+}
+
+.rmp-input {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  min-width: 200px;
+}
+
+.rmp-input:focus {
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 2px rgba(13,110,253,.15);
+}
+
+.rmp-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.rmp-input-wrapper .rmp-input { padding-right: 1.6rem; }
+
+.rmp-input-clear {
+  position: absolute;
+  right: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 11px;
+  line-height: 1;
+  padding: 0.15rem 0.2rem;
+  border-radius: 2px;
+}
+
+.rmp-input-clear:hover { color: var(--text); background: var(--border); }

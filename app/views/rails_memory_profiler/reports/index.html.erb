@@ -1,0 +1,56 @@
+<div class="rmp-header">
+  <h1>Memory Profiler</h1>
+  <p><%= @reports.size %> request<%= "s" unless @reports.size == 1 %> captured</p>
+</div>
+
+<div class="rmp-filters" data-controller="filter">
+  <label for="rmp-controller-filter">Controller</label>
+  <div class="rmp-input-wrapper">
+    <input id="rmp-controller-filter"
+           type="text"
+           class="rmp-input"
+           placeholder="e.g. posts"
+           data-filter-target="input"
+           data-action="input->filter#filter">
+    <button type="button"
+            class="rmp-input-clear"
+            aria-label="Clear filter"
+            hidden
+            data-filter-target="clearButton"
+            data-action="click->filter#clear">✕</button>
+  </div>
+
+  <% if @reports.empty? %>
+  <% else %>
+    <span class="rmp-muted">Filtering is client-side — no page reload needed.</span>
+  <% end %>
+</div>
+
+<% if @reports.empty? %>
+  <p class="rmp-empty">No requests recorded yet. Browse your app and refresh.</p>
+<% else %>
+  <table class="rmp-table">
+    <thead>
+      <tr>
+        <%= sort_th("Path", "path", @sort, @direction) %>
+        <%= sort_th("Controller#Action", "controller", @sort, @direction) %>
+        <%= sort_th("Allocated", "allocated_objects", @sort, @direction) %>
+        <%= sort_th("Retained", "retained_objects", @sort, @direction) %>
+        <%= sort_th("Duration (ms)", "duration_ms", @sort, @direction) %>
+        <%= sort_th("Recorded", "recorded_at", @sort, @direction) %>
+      </tr>
+    </thead>
+    <tbody>
+      <% @reports.each do |report| %>
+        <tr data-filter-target="row" data-controller-name="<%= report[:controller] %>">
+          <td><%= link_to report[:path], report_path(report[:id]), class: "rmp-path" %></td>
+          <td><%= [report[:controller], report[:action]].compact.join("#") %></td>
+          <td><%= allocation_badge(report[:allocated_objects]) %></td>
+          <td class="rmp-muted"><%= number_with_delimiter(report[:retained_objects]) %></td>
+          <td class="rmp-muted"><%= report[:duration_ms] %></td>
+          <td class="rmp-muted"><%= report[:recorded_at]&.strftime("%H:%M:%S") %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>

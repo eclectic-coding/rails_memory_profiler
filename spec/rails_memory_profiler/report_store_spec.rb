@@ -22,10 +22,13 @@ RSpec.describe RailsMemoryProfiler::ReportStore do
   after { described_class.clear }
 
   describe ".push and .all" do
-    it "stores a report and returns it" do
+    it "stores a report and returns it with an assigned id" do
       described_class.push(report)
 
-      expect(described_class.all).to eq([report])
+      stored = described_class.all.first
+      expect(stored).to include(report)
+      expect(stored[:id]).to be_a(String)
+      expect(stored[:id].length).to eq(12)
     end
 
     it "preserves insertion order" do
@@ -33,6 +36,19 @@ RSpec.describe RailsMemoryProfiler::ReportStore do
 
       paths = described_class.all.map { |r| r[:path] }
       expect(paths).to eq(["/posts/0", "/posts/1", "/posts/2"])
+    end
+  end
+
+  describe ".find" do
+    it "returns the report with the given id" do
+      described_class.push(report)
+      id = described_class.all.first[:id]
+
+      expect(described_class.find(id)).to include(report)
+    end
+
+    it "returns nil when no report matches" do
+      expect(described_class.find("nonexistent")).to be_nil
     end
   end
 

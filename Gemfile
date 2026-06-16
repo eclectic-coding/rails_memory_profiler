@@ -6,6 +6,8 @@ gemspec
 gem "puma"
 gem "sqlite3"
 gem "propshaft"
+gem "importmap-rails"
+gem "turbo-rails"
 
 # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
 gem "rubocop-rails-omakase", require: false
