@@ -10,11 +10,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 > Goal: a developer can add the gem, mount the engine, and immediately see per-request allocation data without any other setup.
 
-**Developer experience**
-- `rails generate rails_memory_profiler:install` — copies `config/initializers/rails_memory_profiler.rb` with all options documented
-- Routes: `mount RailsMemoryProfiler::Engine, at: "/rails/memory"`
-- README — installation, mount, configuration table, screenshot
-
 **Gem hygiene**
 - `required_ruby_version >= 3.3`
 - Add `memory_profiler`, `importmap-rails`, `turbo-rails` as dependencies
@@ -49,6 +44,7 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 - `ActiveSupport::Deprecation` infrastructure for future breaking changes
 - Full YARD documentation on public classes
 - Compatibility matrix finalized (Rails 7.1 / 8.x, Ruby 3.3 / 3.4 / 4.0)
+- Documentation audit: review and finalize README, add `CONTRIBUTING.md`, update ROADMAP to reflect no future planned milestones with links for bug reports, feature requests, and contribution guidelines
 
 ---
 
