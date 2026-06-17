@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-17
+
 ### Added
 - Minitest integration (`require "rails_memory_profiler/minitest_matchers"`) — auto-includes `assert_allocates_fewer_than(n, msg = nil) { }` into `Minitest::Test`; opt-in, not auto-required
 
@@ -66,7 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.3.0...HEAD
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.4.0
 [0.3.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.3.0
 [0.2.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.2.0
 [0.1.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.1.0
