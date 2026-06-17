@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-17
+
 ### Added
 - `TestHelper` module (`require "rails_memory_profiler/test_helper"`) — `capture_allocations { }` returns allocated object count via GC.stat diff; `assert_allocations_below(n) { }` raises with a descriptive message if count exceeds threshold; `extend self` so methods work as module-level calls or as instance methods when included in a test class
 - RSpec matcher (`require "rails_memory_profiler/rspec_matchers"`) — `expect { }.to allocate_fewer_than(n)` block expectation backed by `TestHelper.capture_allocations`; both files are opt-in and not auto-required
@@ -51,6 +53,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.3.0
 [0.2.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.2.0
 [0.1.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.1.0
