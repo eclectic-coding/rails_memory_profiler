@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.5.0] - 2026-06-17
+
 ### Added
 - Auto-ignore dashboard mount path — `Engine.mount_path` lazily detects where the engine is mounted and the middleware skips those requests automatically; no configuration needed
 - `DELETE /reports/clear` — flushes the in-memory ring buffer without a server restart; "Clear All" button appears in the dashboard header when reports are present (guarded by a confirm dialog)
@@ -72,7 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.4.0...HEAD
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.5.0...HEAD
+[0.5.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.5.0
 [0.4.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.4.0
 [0.3.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.3.0
 [0.2.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.2.0
