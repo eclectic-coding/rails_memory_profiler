@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `TestHelper` module (`require "rails_memory_profiler/test_helper"`) — `capture_allocations { }` returns allocated object count via GC.stat diff; `assert_allocations_below(n) { }` raises with a descriptive message if count exceeds threshold; `extend self` so methods work as module-level calls or as instance methods when included in a test class
+- RSpec matcher (`require "rails_memory_profiler/rspec_matchers"`) — `expect { }.to allocate_fewer_than(n)` block expectation backed by `TestHelper.capture_allocations`; both files are opt-in and not auto-required
+- `config.raise_on_allocation_spike` (default: `nil`) — set to an integer; middleware raises `AllocationSpikeError` after recording a report whose `allocated_objects` exceeds the threshold; `AllocationSpikeError < StandardError` defined at the module level
+
 ## [0.2.0] - 2026-06-17
 
 ### Added
