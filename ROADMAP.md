@@ -6,4 +6,12 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
+## Status
+
+All planned milestones (0.1.0 through 1.0.0) have shipped. There are no further planned milestones at this time.
+
+The gem is considered stable. The public API — `Configuration`, `Middleware`, `ReportStore`, `TestHelper`, and the notifier interface — will not have breaking changes without a deprecation notice via `RailsMemoryProfiler.deprecator`.
+
+---
+
 Have a feature request or found a bug? [Open an issue](https://github.com/eclectic-coding/rails_memory_profiler/issues) — see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
