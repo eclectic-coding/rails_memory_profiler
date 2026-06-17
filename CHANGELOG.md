@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2026-06-17
+
 ### Added
 - `RailsMemoryProfiler.deprecator` — returns a memoized `ActiveSupport::Deprecation` instance scoped to `"RailsMemoryProfiler"` / `"1.0.0"`; use this for any future breaking-change warnings
 - YARD documentation on all public classes and methods: `RailsMemoryProfiler`, `Configuration`, `ReportStore`, `Middleware`, `TestHelper`, `Engine`
@@ -87,7 +89,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v1.0.0
 [0.5.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.5.0
 [0.4.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.4.0
 [0.3.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.3.0
