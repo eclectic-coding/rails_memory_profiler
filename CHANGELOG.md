@@ -7,6 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Minitest integration (`require "rails_memory_profiler/minitest_matchers"`) — auto-includes `assert_allocates_fewer_than(n, msg = nil) { }` into `Minitest::Test`; opt-in, not auto-required
+
+### Changed
+- `assert_allocations_below` now raises `Minitest::Assertion` when Minitest is loaded (was plain `RuntimeError`), so failures are reported as failures rather than errors in Minitest suites
+
+### Removed
+- `RequestContext` — module was defined but never called (middleware always read from `env` directly); removed to reduce the public API surface before 1.0.0
+- Unused engine boilerplate (`ApplicationController`, `ApplicationJob`, `ApplicationMailer`, `ApplicationRecord`, empty rake tasks stub) — these files shipped in the gem but served no purpose
+
+### Fixed
+- No-op ternary in comparison view — `lv.is_a?(Float) ? lv : lv` now correctly calls `.round(2)` on the Float branch
+
 ## [0.3.0] - 2026-06-17
 
 ### Added

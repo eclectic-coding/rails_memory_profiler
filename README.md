@@ -98,11 +98,18 @@ end
 ### Test helpers
 
 ```ruby
-# Minitest / plain Ruby
+# Plain Ruby / shared utility
 require "rails_memory_profiler/test_helper"
 
 count = RailsMemoryProfiler::TestHelper.capture_allocations { MyClass.new }
 RailsMemoryProfiler::TestHelper.assert_allocations_below(500) { MyClass.new }
+# raises Minitest::Assertion when Minitest is loaded, RuntimeError otherwise
+
+# Minitest — adds assert_allocates_fewer_than to all Minitest::Test subclasses
+require "rails_memory_profiler/minitest_matchers"
+
+assert_allocates_fewer_than(500) { MyClass.new }
+assert_allocates_fewer_than(500, "MyClass allocates too much") { MyClass.new }
 
 # RSpec
 require "rails_memory_profiler/rspec_matchers"

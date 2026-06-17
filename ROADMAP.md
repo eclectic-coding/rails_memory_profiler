@@ -6,15 +6,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
-## 0.4.0 — Housekeeping
-
-- Remove unused engine boilerplate that ships in the gem: `ApplicationController` (dashboard uses `BaseController`), `ApplicationJob`, `ApplicationMailer`, `ApplicationRecord`, and the empty rake tasks stub
-- Fix no-op ternary in `comparisons/show.html.erb` — `lv.is_a?(Float) ? lv : lv` always returns `lv`; Float branch should call `.round(2)`
-- Resolve `RequestContext` — it is defined and exported but never called (middleware reads from `env` directly); either remove it or wire it up as a documented concern for host-app controllers
-- Minitest integration — `assert_allocations_below` currently raises a plain `RuntimeError`; when Minitest is loaded it should raise `Minitest::Assertion` so failures are reported as failures, not errors; add a `minitest_matchers.rb` file parallel to `rspec_matchers.rb`
-
----
-
 ## 0.5.0 — Polish
 
 - Auto-ignore the engine's own mount path — dashboard requests are currently profiled and stored, creating noise; detect the mount point and add it to `ignore_paths` automatically (or add it as the default in the generator template)
