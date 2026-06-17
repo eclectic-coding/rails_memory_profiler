@@ -3,54 +3,95 @@
   <p><%= @reports.size %> request<%= "s" unless @reports.size == 1 %> captured</p>
 </div>
 
-<div class="rmp-filters" data-controller="filter">
-  <label for="rmp-controller-filter">Controller</label>
-  <div class="rmp-input-wrapper">
-    <input id="rmp-controller-filter"
-           type="text"
-           class="rmp-input"
-           placeholder="e.g. posts"
-           data-filter-target="input"
-           data-action="input->filter#filter">
+<div data-controller="filter compare" data-compare-path-value="<%= compare_reports_path %>">
+  <div class="rmp-filters">
+    <label for="rmp-controller-filter">Controller</label>
+    <div class="rmp-input-wrapper">
+      <input id="rmp-controller-filter"
+             type="text"
+             class="rmp-input"
+             placeholder="e.g. posts"
+             data-filter-target="controllerInput"
+             data-action="input->filter#filter">
+    </div>
+
+    <label for="rmp-action-filter">Action</label>
+    <div class="rmp-input-wrapper">
+      <input id="rmp-action-filter"
+             type="text"
+             class="rmp-input"
+             placeholder="e.g. index"
+             data-filter-target="actionInput"
+             data-action="input->filter#filter">
+    </div>
+
+    <label for="rmp-method-filter">Method</label>
+    <select id="rmp-method-filter"
+            class="rmp-select"
+            data-filter-target="methodSelect"
+            data-action="change->filter#filter">
+      <option value="">All</option>
+      <option value="GET">GET</option>
+      <option value="POST">POST</option>
+      <option value="PATCH">PATCH</option>
+      <option value="PUT">PUT</option>
+      <option value="DELETE">DELETE</option>
+    </select>
+
     <button type="button"
-            class="rmp-input-clear"
-            aria-label="Clear filter"
+            class="rmp-btn-reset"
             hidden
             data-filter-target="clearButton"
-            data-action="click->filter#clear">✕</button>
+            data-action="click->filter#clear">Reset</button>
+
+    <% unless @reports.empty? %>
+      <span class="rmp-muted">Filtering is client-side — no page reload needed.</span>
+    <% end %>
+  </div>
+
+  <div class="rmp-compare-bar" hidden data-compare-target="bar">
+    <span class="rmp-compare-bar-hint">2 requests selected</span>
+    <a href="#" class="rmp-btn" data-compare-target="link">Compare →</a>
   </div>
 
   <% if @reports.empty? %>
+    <p class="rmp-empty">No requests recorded yet. Browse your app and refresh.</p>
   <% else %>
-    <span class="rmp-muted">Filtering is client-side — no page reload needed.</span>
+    <table class="rmp-table">
+      <thead>
+        <tr>
+          <th class="rmp-col-check"></th>
+          <%= sort_th("Path", "path", @sort, @direction) %>
+          <%= sort_th("Controller#Action", "controller", @sort, @direction) %>
+          <%= sort_th("Allocated", "allocated_objects", @sort, @direction) %>
+          <%= sort_th("Retained", "retained_objects", @sort, @direction) %>
+          <%= sort_th("Duration (ms)", "duration_ms", @sort, @direction) %>
+          <%= sort_th("Recorded", "recorded_at", @sort, @direction) %>
+        </tr>
+      </thead>
+      <tbody>
+        <% @reports.each do |report| %>
+          <tr data-filter-target="row"
+              data-controller-name="<%= report[:controller] %>"
+              data-action-name="<%= report[:action] %>"
+              data-http-method="<%= report[:method] %>">
+            <td class="rmp-col-check">
+              <input type="checkbox"
+                     class="rmp-checkbox"
+                     value="<%= report[:id] %>"
+                     aria-label="Select for comparison"
+                     data-compare-target="checkbox"
+                     data-action="change->compare#toggle">
+            </td>
+            <td><%= link_to report[:path], report_path(report[:id]), class: "rmp-path" %></td>
+            <td><%= [report[:controller], report[:action]].compact.join("#") %></td>
+            <td><%= allocation_badge(report[:allocated_objects]) %></td>
+            <td class="rmp-muted"><%= number_with_delimiter(report[:retained_objects]) %></td>
+            <td class="rmp-muted"><%= report[:duration_ms] %></td>
+            <td class="rmp-muted"><%= report[:recorded_at]&.strftime("%H:%M:%S") %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   <% end %>
 </div>
-
-<% if @reports.empty? %>
-  <p class="rmp-empty">No requests recorded yet. Browse your app and refresh.</p>
-<% else %>
-  <table class="rmp-table">
-    <thead>
-      <tr>
-        <%= sort_th("Path", "path", @sort, @direction) %>
-        <%= sort_th("Controller#Action", "controller", @sort, @direction) %>
-        <%= sort_th("Allocated", "allocated_objects", @sort, @direction) %>
-        <%= sort_th("Retained", "retained_objects", @sort, @direction) %>
-        <%= sort_th("Duration (ms)", "duration_ms", @sort, @direction) %>
-        <%= sort_th("Recorded", "recorded_at", @sort, @direction) %>
-      </tr>
-    </thead>
-    <tbody>
-      <% @reports.each do |report| %>
-        <tr data-filter-target="row" data-controller-name="<%= report[:controller] %>">
-          <td><%= link_to report[:path], report_path(report[:id]), class: "rmp-path" %></td>
-          <td><%= [report[:controller], report[:action]].compact.join("#") %></td>
-          <td><%= allocation_badge(report[:allocated_objects]) %></td>
-          <td class="rmp-muted"><%= number_with_delimiter(report[:retained_objects]) %></td>
-          <td class="rmp-muted"><%= report[:duration_ms] %></td>
-          <td class="rmp-muted"><%= report[:recorded_at]&.strftime("%H:%M:%S") %></td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-<% end %>

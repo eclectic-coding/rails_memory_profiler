@@ -1,0 +1,75 @@
+<%= link_to "← All Requests", reports_path, class: "rmp-back" %>
+
+<div class="rmp-header">
+  <h1>Request Comparison</h1>
+  <p>
+    <%= link_to @left[:path], report_path(@left[:id]), class: "rmp-path" %>
+    &nbsp;vs&nbsp;
+    <%= link_to @right[:path], report_path(@right[:id]), class: "rmp-path" %>
+  </p>
+</div>
+
+<div class="rmp-compare">
+  <table class="rmp-table rmp-compare-table">
+    <thead>
+      <tr>
+        <th class="rmp-compare-field">Field</th>
+        <th>
+          <%= link_to @left[:path], report_path(@left[:id]) %>
+          <br><span class="rmp-muted"><%= [@left[:controller], @left[:action]].compact.join("#") %></span>
+        </th>
+        <th>
+          <%= link_to @right[:path], report_path(@right[:id]) %>
+          <br><span class="rmp-muted"><%= [@right[:controller], @right[:action]].compact.join("#") %></span>
+        </th>
+        <th class="rmp-compare-delta">Delta (B − A)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="rmp-compare-field">HTTP Method</td>
+        <td><%= @left[:method] %></td>
+        <td><%= @right[:method] %></td>
+        <td class="rmp-muted">—</td>
+      </tr>
+      <tr>
+        <td class="rmp-compare-field">Recorded At</td>
+        <td><%= @left[:recorded_at]&.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td><%= @right[:recorded_at]&.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td class="rmp-muted">—</td>
+      </tr>
+      <%
+        numeric_rows = [
+          ["Allocated Objects", :allocated_objects],
+          ["Retained Objects",  :retained_objects],
+          ["Duration (ms)",     :duration_ms],
+        ]
+      %>
+      <% numeric_rows.each do |label, key| %>
+        <%
+          lv    = @left[key]  || 0
+          rv    = @right[key] || 0
+          delta = rv - lv
+          delta_class = if delta > 0 then "rmp-delta--worse"
+                        elsif delta < 0 then "rmp-delta--better"
+                        else nil end
+          delta_str = if delta > 0 then "+#{number_with_delimiter(delta.round(2))}"
+                      elsif delta < 0 then number_with_delimiter(delta.round(2)).to_s
+                      else "—" end
+        %>
+        <tr>
+          <td class="rmp-compare-field"><%= label %></td>
+          <td><%= number_with_delimiter(lv.is_a?(Float) ? lv : lv) %></td>
+          <td><%= number_with_delimiter(rv.is_a?(Float) ? rv : rv) %></td>
+          <td class="<%= delta_class %>"><%= delta_str %></td>
+        </tr>
+      <% end %>
+      <tr>
+        <td class="rmp-compare-field">Detailed Report</td>
+        <td><%= @left[:detail] ? "Yes" : "No" %></td>
+        <td><%= @right[:detail] ? "Yes" : "No" %></td>
+        <td class="rmp-muted">—</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

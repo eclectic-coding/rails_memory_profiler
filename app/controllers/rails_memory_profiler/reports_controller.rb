@@ -21,6 +21,23 @@ module RailsMemoryProfiler
       end
     end
 
+    def compare
+      ids     = Array(params[:ids]).first(2)
+      reports = ids.map { |id| ReportStore.find(id) }.compact
+
+      if reports.size < 2
+        redirect_to reports_path
+        return
+      end
+
+      @left, @right = reports
+
+      respond_to do |format|
+        format.html
+        format.json { render json: { left: @left, right: @right } }
+      end
+    end
+
     def show
       @report = ReportStore.find(params[:id])
 
