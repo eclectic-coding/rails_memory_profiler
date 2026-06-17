@@ -14,6 +14,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
     it { expect(config.detailed_reports).to be(false) }
     it { expect(config.detailed_sample_rate).to eq(10) }
     it { expect(config.raise_on_allocation_spike).to be_nil }
+    it { expect(config.notifiers).to eq([]) }
+    it { expect(config.log_file).to be_nil }
   end
 
   describe "assignment" do
@@ -28,6 +30,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
       config.detailed_reports          = true
       config.detailed_sample_rate      = 5
       config.raise_on_allocation_spike = 5_000
+      config.notifiers                 = [->(_r) {}]
+      config.log_file                  = "log/rmp.log"
 
       expect(config.enabled).to be(true)
       expect(config.sample_rate).to eq(10)
@@ -39,6 +43,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
       expect(config.detailed_reports).to be(true)
       expect(config.detailed_sample_rate).to eq(5)
       expect(config.raise_on_allocation_spike).to eq(5_000)
+      expect(config.notifiers.size).to eq(1)
+      expect(config.log_file).to eq("log/rmp.log")
     end
   end
 end

@@ -78,6 +78,9 @@ All options and their defaults:
 | `ignore_controllers` | `[]` | Controller names to skip (e.g. `"rails/health"`) |
 | `detailed_reports` | `false` | Capture full `MemoryProfiler.report` breakdowns; requires `gem "memory_profiler"` in your Gemfile |
 | `detailed_sample_rate` | `10` | When `detailed_reports` is enabled, capture a full report every Nth profiled request |
+| `notifiers` | `[]` | Array of objects responding to `#call(report)`; called after each report is stored |
+| `log_file` | `nil` | Path to append JSON-serialized reports (one per line); shortcut for `Notifiers::FileLogger` |
+| `raise_on_allocation_spike` | `nil` | Raise `AllocationSpikeError` when `allocated_objects` exceeds this threshold |
 
 Example:
 
@@ -87,7 +90,24 @@ RailsMemoryProfiler.configure do |config|
   config.min_allocated_objects = 1_000
   config.ignore_paths          = ["/rails/memory", "/up"]
   config.ignore_controllers    = ["rails/health"]
+  config.notifiers             = [RailsMemoryProfiler::Notifiers::Console.new]
+  config.log_file              = Rails.root.join("log/memory_profiler.jsonl")
 end
+```
+
+### Test helpers
+
+```ruby
+# Minitest / plain Ruby
+require "rails_memory_profiler/test_helper"
+
+count = RailsMemoryProfiler::TestHelper.capture_allocations { MyClass.new }
+RailsMemoryProfiler::TestHelper.assert_allocations_below(500) { MyClass.new }
+
+# RSpec
+require "rails_memory_profiler/rspec_matchers"
+
+expect { MyClass.new }.to allocate_fewer_than(500)
 ```
 
 [↑ Back to top](#railsmemoryprofiler)

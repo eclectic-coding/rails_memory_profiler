@@ -3,7 +3,8 @@ module RailsMemoryProfiler
     attr_accessor :enabled, :sample_rate, :store_size, :dashboard_enabled,
                   :min_allocated_objects, :ignore_paths, :ignore_controllers,
                   :detailed_reports, :detailed_sample_rate,
-                  :raise_on_allocation_spike
+                  :raise_on_allocation_spike,
+                  :notifiers, :log_file
 
     def initialize
       @enabled               = Rails.env.development?
@@ -16,6 +17,8 @@ module RailsMemoryProfiler
       @detailed_reports          = false
       @detailed_sample_rate      = 10
       @raise_on_allocation_spike = nil
+      @notifiers                 = []
+      @log_file                  = nil
     end
   end
 end

@@ -32,4 +32,18 @@ RailsMemoryProfiler.configure do |config|
 
   # When detailed_reports is enabled, capture a full report every Nth profiled request.
   # config.detailed_sample_rate = 10
+
+  # Notifiers — called after each report is stored. Each must respond to #call(report).
+  # Built-in options:
+  #   RailsMemoryProfiler::Notifiers::Logger.new   — writes to Rails.logger
+  #   RailsMemoryProfiler::Notifiers::Stdout.new   — writes to $stdout
+  #   RailsMemoryProfiler::Notifiers::Console.new  — colorized terminal output
+  # config.notifiers = [RailsMemoryProfiler::Notifiers::Logger.new]
+
+  # Append JSON-serialized reports to a file (one report per line).
+  # config.log_file = Rails.root.join("log/memory_profiler.log").to_s
+
+  # Raise AllocationSpikeError when a request exceeds this many allocated objects.
+  # Useful in test environments to catch unexpected memory spikes.
+  # config.raise_on_allocation_spike = nil
 end
