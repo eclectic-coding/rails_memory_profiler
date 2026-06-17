@@ -13,6 +13,13 @@
              placeholder="e.g. posts"
              data-filter-target="controllerInput"
              data-action="input->filter#filter">
+      <button type="button"
+              class="rmp-input-clear"
+              aria-label="Clear controller filter"
+              hidden
+              data-filter-target="controllerClear"
+              data-action="click->filter#clearField"
+              data-filter-field-param="controller">✕</button>
     </div>
 
     <label for="rmp-action-filter">Action</label>
@@ -23,6 +30,13 @@
              placeholder="e.g. index"
              data-filter-target="actionInput"
              data-action="input->filter#filter">
+      <button type="button"
+              class="rmp-input-clear"
+              aria-label="Clear action filter"
+              hidden
+              data-filter-target="actionClear"
+              data-action="click->filter#clearField"
+              data-filter-field-param="action">✕</button>
     </div>
 
     <label for="rmp-method-filter">Method</label>
