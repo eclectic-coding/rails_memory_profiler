@@ -93,7 +93,15 @@ module RailsMemoryProfiler
         payload[:detail] = detail if detail
 
         ReportStore.push(payload)
+        notify!(payload)
         check_spike!(allocated_objects, env)
+      end
+
+      def notify!(report)
+        RailsMemoryProfiler.config.notifiers.each { |n| n.call(report) }
+        if (path = RailsMemoryProfiler.config.log_file)
+          Notifiers::FileLogger.new(path).call(report)
+        end
       end
 
       def check_spike!(allocated_objects, env)

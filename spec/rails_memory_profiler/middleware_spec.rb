@@ -90,6 +90,37 @@ RSpec.describe RailsMemoryProfiler::Middleware do
       end
     end
 
+    context "with notifiers configured" do
+      it "calls each notifier with the stored report" do
+        notifier = double("notifier")
+        expect(notifier).to receive(:call).with(hash_including(path: "/posts"))
+        RailsMemoryProfiler.config.notifiers = [notifier]
+        middleware.call(env_for("/posts", params: { controller: "posts", action: "index" }))
+      end
+
+      it "calls multiple notifiers" do
+        n1 = double("n1")
+        n2 = double("n2")
+        expect(n1).to receive(:call)
+        expect(n2).to receive(:call)
+        RailsMemoryProfiler.config.notifiers = [n1, n2]
+        middleware.call(env_for)
+      end
+    end
+
+    context "with log_file configured" do
+      it "appends a JSON report line to the file" do
+        require "tempfile"
+        require "json"
+        Tempfile.create("rmp") do |f|
+          RailsMemoryProfiler.config.log_file = f.path
+          middleware.call(env_for("/posts", params: { controller: "posts", action: "index" }))
+          data = JSON.parse(File.read(f.path))
+          expect(data["path"]).to eq("/posts")
+        end
+      end
+    end
+
     context "with raise_on_allocation_spike" do
       it "raises AllocationSpikeError when allocated objects exceed the threshold" do
         RailsMemoryProfiler.config.raise_on_allocation_spike = 1
