@@ -20,5 +20,9 @@ module RailsMemoryProfiler
     def reset_config!
       @config = Configuration.new
     end
+
+    def deprecator
+      @deprecator ||= ActiveSupport::Deprecation.new("1.0.0", "RailsMemoryProfiler")
+    end
   end
 end

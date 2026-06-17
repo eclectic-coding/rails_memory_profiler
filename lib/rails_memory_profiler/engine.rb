@@ -6,18 +6,25 @@ module RailsMemoryProfiler
     isolate_namespace RailsMemoryProfiler
     config.generators.api_only = true
 
+    MOUNT_PATH_MUTEX = Mutex.new
+    private_constant :MOUNT_PATH_MUTEX
+
     class << self
       def mount_path
-        @mount_path ||= begin
-          mounted = Rails.application.routes.routes.find do |route|
-            route.app.app == self rescue false
+        return @mount_path if @mount_path
+
+        MOUNT_PATH_MUTEX.synchronize do
+          @mount_path ||= begin
+            mounted = Rails.application.routes.routes.find do |route|
+              route.app.app == self rescue false
+            end
+            mounted&.path&.spec&.to_s&.gsub(/\([^)]*\)/, "")
           end
-          mounted&.path&.spec&.to_s&.gsub(/\([^)]*\)/, "")
         end
       end
 
       def reset_mount_path!
-        @mount_path = nil
+        MOUNT_PATH_MUTEX.synchronize { @mount_path = nil }
       end
     end
 

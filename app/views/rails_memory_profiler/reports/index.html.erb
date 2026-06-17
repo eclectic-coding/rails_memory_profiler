@@ -5,7 +5,7 @@
       <p><%= @reports.size %> request<%= "s" unless @reports.size == 1 %> captured</p>
     </div>
     <% unless @reports.empty? %>
-      <%= button_to "Clear All", clear_reports_path, method: :delete,
+      <%= button_to "Clear All", store_path, method: :delete,
             class: "rmp-btn-danger",
             form: { data: { turbo_confirm: "Clear all reports? This cannot be undone." } } %>
     <% end %>

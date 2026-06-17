@@ -1,5 +1,8 @@
 module RailsMemoryProfiler
   module ReportStore
+    MUTEX = Mutex.new
+    private_constant :MUTEX
+
     class << self
       def push(report)
         mutex.synchronize do
@@ -38,7 +41,7 @@ module RailsMemoryProfiler
       private
 
         def mutex
-          @mutex ||= Mutex.new
+          MUTEX
         end
 
         def capacity
