@@ -6,13 +6,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
-## 0.3.0 — Workflow integration
-
-- Notifiers — same pluggable interface as QueryOwl: `Notifiers::Logger`, `Notifiers::Stdout`, `Notifiers::Console` (with colorized output)
-- File logger — append JSON-serialized reports to a configurable path
-
----
-
 ## 1.0.0 — Stable API
 
 - Public API surface locked: `Configuration`, `Middleware`, `ReportStore`, `TestHelper`
