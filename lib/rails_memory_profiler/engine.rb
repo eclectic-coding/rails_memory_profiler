@@ -10,6 +10,12 @@ module RailsMemoryProfiler
     private_constant :MOUNT_PATH_MUTEX
 
     class << self
+      # Returns the path at which the engine is mounted in the host application,
+      # e.g. +"/rails/memory"+. Detected lazily on first call by scanning
+      # +Rails.application.routes+, then cached. Returns +nil+ if the engine is
+      # not mounted.
+      #
+      # @return [String, nil]
       def mount_path
         return @mount_path if @mount_path
 
@@ -23,6 +29,10 @@ module RailsMemoryProfiler
         end
       end
 
+      # Clears the cached mount path so it will be re-detected on the next call.
+      # Primarily used in tests.
+      #
+      # @return [void]
       def reset_mount_path!
         MOUNT_PATH_MUTEX.synchronize { @mount_path = nil }
       end

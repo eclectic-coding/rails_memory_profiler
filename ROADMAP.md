@@ -6,11 +6,11 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
-## 1.0.0 — Stable API
+## Status
 
-- Full YARD documentation on public classes
-- Compatibility matrix finalized (Rails 7.1 / 8.x, Ruby 3.3 / 3.4 / 4.0)
-- Documentation audit: review and finalize README, add `CONTRIBUTING.md`, update ROADMAP to reflect no future planned milestones with links for bug reports, feature requests, and contribution guidelines
+All planned milestones (0.1.0 through 1.0.0) have shipped. There are no further planned milestones at this time.
+
+The gem is considered stable. The public API — `Configuration`, `Middleware`, `ReportStore`, `TestHelper`, and the notifier interface — will not have breaking changes without a deprecation notice via `RailsMemoryProfiler.deprecator`.
 
 ---
 

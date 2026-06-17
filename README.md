@@ -18,6 +18,7 @@ A Rack middleware captures object allocations for every request using `GC.stat` 
 - [Installation](#installation)
 - [Dashboard](#dashboard)
 - [Configuration](#configuration)
+- [Compatibility](#compatibility)
 - [Contributing](#contributing)
 - [License](#license)
 
@@ -121,9 +122,20 @@ expect { MyClass.new }.to allocate_fewer_than(500)
 
 ---
 
+## Compatibility
+
+|          | Ruby 3.3 | Ruby 3.4 | Ruby 4.0 |
+|----------|:--------:|:--------:|:--------:|
+| Rails 7.1 | ✓ | ✓ | ✓ |
+| Rails 8.x | ✓ | ✓ | ✓ |
+
+[↑ Back to top](#railsmemoryprofiler)
+
+---
+
 ## Contributing
 
-Bug reports and pull requests are welcome on [GitHub](https://github.com/eclectic-coding/rails_memory_profiler).
+Bug reports and pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 [↑ Back to top](#railsmemoryprofiler)
 

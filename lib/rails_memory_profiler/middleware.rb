@@ -1,5 +1,14 @@
 module RailsMemoryProfiler
+  # Rack middleware that profiles each request and pushes a report into {ReportStore}.
+  # Registered automatically by the {Engine} initializer; you do not need to add it
+  # to the middleware stack manually.
+  #
+  # Profiling is skipped when:
+  # - {Configuration#enabled} is +false+
+  # - the request path matches {Configuration#ignore_paths} or the engine mount path
+  # - the request is not selected by {Configuration#sample_rate}
   class Middleware
+    # @param app [#call] the next Rack application in the stack
     def initialize(app)
       @app            = app
       @request_count  = 0
@@ -7,6 +16,10 @@ module RailsMemoryProfiler
       @mutex          = Mutex.new
     end
 
+    # Profiles the request if applicable and delegates to the inner app.
+    #
+    # @param env [Hash] Rack environment
+    # @return [Array] Rack response triplet
     def call(env)
       return @app.call(env) unless RailsMemoryProfiler.config.enabled
       return @app.call(env) if ignored_path?(env["PATH_INFO"])

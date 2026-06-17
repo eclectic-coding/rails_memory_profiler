@@ -9,6 +9,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - `RailsMemoryProfiler.deprecator` — returns a memoized `ActiveSupport::Deprecation` instance scoped to `"RailsMemoryProfiler"` / `"1.0.0"`; use this for any future breaking-change warnings
+- YARD documentation on all public classes and methods: `RailsMemoryProfiler`, `Configuration`, `ReportStore`, `Middleware`, `TestHelper`, `Engine`
+- Compatibility matrix in README (Rails 7.1 / 8.x × Ruby 3.3 / 3.4 / 4.0)
+- `CONTRIBUTING.md` — setup, workflow, test commands, release notes
 
 ### Changed
 - `DELETE /store` replaces `DELETE /reports/clear` — store flush is now handled by `StoreController#destroy`, a proper CRUD action on the store resource; `ReportsController` is now index/show only
