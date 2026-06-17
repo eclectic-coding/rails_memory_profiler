@@ -48,6 +48,18 @@ RSpec.describe RailsMemoryProfiler::Middleware do
       end
     end
 
+    context "with engine mount path auto-ignore" do
+      it "skips requests to the engine mount path without any config" do
+        middleware.call(env_for("/rails/memory/reports"))
+        expect(RailsMemoryProfiler::ReportStore.size).to eq(0)
+      end
+
+      it "still profiles paths that do not start with the mount prefix" do
+        middleware.call(env_for("/posts"))
+        expect(RailsMemoryProfiler::ReportStore.size).to eq(1)
+      end
+    end
+
     context "with ignore_paths" do
       it "skips requests matching a string prefix" do
         RailsMemoryProfiler.config.ignore_paths = ["/health"]

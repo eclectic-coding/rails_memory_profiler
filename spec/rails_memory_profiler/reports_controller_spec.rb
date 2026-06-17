@@ -63,6 +63,21 @@ RSpec.describe "RailsMemoryProfiler::Reports", type: :request do
     end
   end
 
+  describe "DELETE /rails/memory/reports/clear" do
+    it "clears the store and redirects to index" do
+      RailsMemoryProfiler::ReportStore.push(report)
+      expect { delete "/rails/memory/reports/clear" }
+        .to change { RailsMemoryProfiler::ReportStore.size }.from(1).to(0)
+      expect(response).to redirect_to("/rails/memory/reports")
+    end
+
+    it "returns 403 when dashboard is disabled" do
+      RailsMemoryProfiler.config.dashboard_enabled = false
+      delete "/rails/memory/reports/clear"
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
+
   describe "GET /rails/memory/reports/:id" do
     context "when the report exists" do
       before { RailsMemoryProfiler::ReportStore.push(report) }

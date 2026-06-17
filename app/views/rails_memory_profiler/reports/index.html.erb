@@ -1,6 +1,15 @@
 <div class="rmp-header">
-  <h1>Memory Profiler</h1>
-  <p><%= @reports.size %> request<%= "s" unless @reports.size == 1 %> captured</p>
+  <div class="rmp-header-row">
+    <div>
+      <h1>Memory Profiler</h1>
+      <p><%= @reports.size %> request<%= "s" unless @reports.size == 1 %> captured</p>
+    </div>
+    <% unless @reports.empty? %>
+      <%= button_to "Clear All", clear_reports_path, method: :delete,
+            class: "rmp-btn-danger",
+            form: { data: { turbo_confirm: "Clear all reports? This cannot be undone." } } %>
+    <% end %>
+  </div>
 </div>
 
 <div data-controller="filter compare" data-compare-path-value="<%= comparison_path %>">
