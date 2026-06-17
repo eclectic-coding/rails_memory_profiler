@@ -93,6 +93,15 @@ module RailsMemoryProfiler
         payload[:detail] = detail if detail
 
         ReportStore.push(payload)
+        check_spike!(allocated_objects, env)
+      end
+
+      def check_spike!(allocated_objects, env)
+        threshold = RailsMemoryProfiler.config.raise_on_allocation_spike
+        return unless threshold && allocated_objects > threshold
+
+        raise AllocationSpikeError,
+          "#{env['PATH_INFO']} allocated #{allocated_objects} objects (threshold: #{threshold})"
       end
 
       def serialize_stats(stats)

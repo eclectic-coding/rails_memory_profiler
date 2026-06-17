@@ -10,8 +10,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 - Notifiers — same pluggable interface as QueryOwl: `Notifiers::Logger`, `Notifiers::Stdout`, `Notifiers::Console` (with colorized output)
 - File logger — append JSON-serialized reports to a configurable path
-- `TestHelper` — `capture_allocations { }`, `assert_allocations_below(n)`, RSpec matchers (`allocate_fewer_than`)
-- `config.raise_on_allocation_spike` — raise in test env when a request exceeds a threshold
 
 ---
 

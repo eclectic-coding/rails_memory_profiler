@@ -90,6 +90,18 @@ RSpec.describe RailsMemoryProfiler::Middleware do
       end
     end
 
+    context "with raise_on_allocation_spike" do
+      it "raises AllocationSpikeError when allocated objects exceed the threshold" do
+        RailsMemoryProfiler.config.raise_on_allocation_spike = 1
+        expect { middleware.call(env_for) }.to raise_error(RailsMemoryProfiler::AllocationSpikeError, /threshold: 1/)
+      end
+
+      it "does not raise when allocations are below the threshold" do
+        RailsMemoryProfiler.config.raise_on_allocation_spike = 999_999_999
+        expect { middleware.call(env_for) }.not_to raise_error
+      end
+    end
+
     context "with sample_rate" do
       it "only profiles every Nth request" do
         RailsMemoryProfiler.config.sample_rate = 3
