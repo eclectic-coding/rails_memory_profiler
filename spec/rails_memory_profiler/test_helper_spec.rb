@@ -22,7 +22,14 @@ RSpec.describe RailsMemoryProfiler::TestHelper do
       expect { helper.assert_allocations_below(1_000_000) { "x" } }.not_to raise_error
     end
 
-    it "raises with a descriptive message when allocations exceed the threshold" do
+    it "raises Minitest::Assertion with a descriptive message when allocations exceed the threshold" do
+      expect {
+        helper.assert_allocations_below(1) { Array.new(1_000) { Object.new } }
+      }.to raise_error(Minitest::Assertion, /fewer than 1/)
+    end
+
+    it "raises RuntimeError when Minitest is not available" do
+      allow(Object).to receive(:const_defined?).with(:Minitest).and_return(false)
       expect {
         helper.assert_allocations_below(1) { Array.new(1_000) { Object.new } }
       }.to raise_error(RuntimeError, /fewer than 1/)

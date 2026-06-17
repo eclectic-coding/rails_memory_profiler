@@ -15,7 +15,9 @@ module RailsMemoryProfiler
       count = capture_allocations(&block)
       return if count < threshold
 
-      raise "Expected fewer than #{threshold} allocated objects but got #{count}"
+      message = "Expected fewer than #{threshold} allocated objects but got #{count}"
+      error_class = Object.const_defined?(:Minitest) ? Minitest::Assertion : RuntimeError
+      raise error_class, message
     end
   end
 end

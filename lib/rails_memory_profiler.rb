@@ -1,6 +1,5 @@
 require "rails_memory_profiler/version"
 require "rails_memory_profiler/configuration"
-require "rails_memory_profiler/request_context"
 require "rails_memory_profiler/report_store"
 require "rails_memory_profiler/notifiers"
 require "rails_memory_profiler/middleware"

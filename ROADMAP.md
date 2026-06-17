@@ -6,6 +6,13 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
+## 0.5.0 — Polish
+
+- Auto-ignore the engine's own mount path — dashboard requests are currently profiled and stored, creating noise; detect the mount point and add it to `ignore_paths` automatically (or add it as the default in the generator template)
+- `ReportStore.clear` via the dashboard — add a UI button to flush the in-memory ring buffer without restarting the server
+
+---
+
 ## 1.0.0 — Stable API
 
 - Public API surface locked: `Configuration`, `Middleware`, `ReportStore`, `TestHelper`
