@@ -1,11 +1,5 @@
 module RailsMemoryProfiler
-  class ReportsController < ActionController::Base
-    protect_from_forgery with: :null_session
-    layout "rails_memory_profiler/application"
-    helper RailsMemoryProfiler::ApplicationHelper
-
-    before_action :check_dashboard_enabled
-
+  class ReportsController < BaseController
     SORTABLE_COLUMNS = %w[path controller allocated_objects retained_objects duration_ms recorded_at].freeze
 
     def index
@@ -18,23 +12,6 @@ module RailsMemoryProfiler
           @direction = params[:direction] == "asc" ? "asc" : "desc"
           @reports   = sorted(reports, @sort, @direction)
         end
-      end
-    end
-
-    def compare
-      ids     = Array(params[:ids]).first(2)
-      reports = ids.map { |id| ReportStore.find(id) }.compact
-
-      if reports.size < 2
-        redirect_to reports_path
-        return
-      end
-
-      @left, @right = reports
-
-      respond_to do |format|
-        format.html
-        format.json { render json: { left: @left, right: @right } }
       end
     end
 
@@ -58,10 +35,6 @@ module RailsMemoryProfiler
       def sorted(reports, sort, direction)
         sorted = reports.sort_by { |r| r[sort.to_sym] || 0 }
         direction == "asc" ? sorted : sorted.reverse
-      end
-
-      def check_dashboard_enabled
-        head :forbidden unless RailsMemoryProfiler.config.dashboard_enabled
       end
   end
 end
