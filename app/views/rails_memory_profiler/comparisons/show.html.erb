@@ -59,8 +59,8 @@
         %>
         <tr>
           <td class="rmp-compare-field"><%= label %></td>
-          <td><%= number_with_delimiter(lv.is_a?(Float) ? lv : lv) %></td>
-          <td><%= number_with_delimiter(rv.is_a?(Float) ? rv : rv) %></td>
+          <td><%= number_with_delimiter(lv.is_a?(Float) ? lv.round(2) : lv) %></td>
+          <td><%= number_with_delimiter(rv.is_a?(Float) ? rv.round(2) : rv) %></td>
           <td class="<%= delta_class %>"><%= delta_str %></td>
         </tr>
       <% end %>
