@@ -6,14 +6,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ---
 
-
-## 0.2.0 — Richer reports
-
-- Sort + filter by allocated bytes, retained objects, controller, action
-- Request comparison: pin two requests and diff their allocation profiles
-
----
-
 ## 0.3.0 — Workflow integration
 
 - Notifiers — same pluggable interface as QueryOwl: `Notifiers::Logger`, `Notifiers::Stdout`, `Notifiers::Console` (with colorized output)

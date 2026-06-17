@@ -12,10 +12,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `config.detailed_sample_rate` — capture a detailed report every Nth profiled request when `detailed_reports` is enabled (default: `10`)
 - Show view drilldown — when a report includes detail, the show page renders breakdown tables (allocated/retained by gem, class, file, and location); top 20 entries per table
 - `_06_breakdowns.css` — responsive grid layout for breakdown tables
+- Filter bar: action text filter and HTTP method select alongside the existing controller filter; all three applied as AND logic client-side; per-input floating ✕ clear buttons and a global Reset button
+- Request comparison: select any two reports via checkboxes; a compare bar appears with a direct link to `GET /comparison?ids[]=…&ids[]=…`; `ComparisonsController#show` renders a side-by-side table with delta column (green = better, red = worse for memory/duration metrics)
+- `BaseController` — shared dashboard setup (layout, helper, CSRF, dashboard guard) extracted from `ReportsController`; `ComparisonsController` inherits from it
+- Stimulus controllers moved to `controllers/` subfolder; `controllers/application.js` + `controllers/index.js` follow the stimulus-rails convention
 
 ### Fixed
 - Standardised recommended engine mount path to `/rails/memory` across generator output, README, and dummy app (`/rails_memory_profiler` was the old default)
 - Moved `puma`, `sqlite3`, and `propshaft` to `:development, :test` Gemfile group so the dummy app can be run manually without JS asset routing errors
+- Fixed scope bug: `data-controller="filter"` was on `.rmp-filters` so `data-filter-target="row"` elements in the table were invisible to the controller; outer wrapper now carries both `filter` and `compare` controllers
+- Fixed `_06_breakdowns.css` using undefined `--rmp-*` CSS variables; updated to `--surface`, `--border`, `--muted` defined in `_01_base.css`
 
 ## [0.1.0] - 2026-06-16
 
