@@ -15,11 +15,6 @@ module RailsMemoryProfiler
       end
     end
 
-    def clear
-      ReportStore.clear
-      redirect_to reports_path
-    end
-
     def show
       @report = ReportStore.find(params[:id])
 
