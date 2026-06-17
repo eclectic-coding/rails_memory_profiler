@@ -6,8 +6,8 @@
 }
 
 .rmp-breakdown {
-  background: var(--rmp-surface);
-  border: 1px solid var(--rmp-border);
+  background: var(--surface);
+  border: 1px solid var(--border);
   border-radius: 6px;
   overflow: hidden;
 }
@@ -17,9 +17,9 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--rmp-muted);
+  color: var(--muted);
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--rmp-border);
+  border-bottom: 1px solid var(--border);
   margin: 0;
 }
 
@@ -36,5 +36,5 @@
 .rmp-breakdown .rmp-table td:last-child {
   text-align: right;
   font-variant-numeric: tabular-nums;
-  color: var(--rmp-muted);
+  color: var(--muted);
 }

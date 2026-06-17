@@ -1,0 +1,46 @@
+.rmp-col-check { width: 2.5rem; text-align: center; }
+.rmp-checkbox   { cursor: pointer; accent-color: var(--accent); width: 15px; height: 15px; }
+
+.rmp-compare-bar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.55rem 1rem;
+  margin-bottom: 0.75rem;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius);
+}
+
+.rmp-compare-bar-hint { font-size: 13px; color: #1e40af; }
+
+.rmp-btn {
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  text-decoration: none;
+}
+
+.rmp-btn:hover { background: #4338ca; }
+
+.rmp-compare { margin-top: 1.5rem; }
+
+.rmp-compare-table .rmp-compare-field {
+  font-weight: 600;
+  color: var(--muted);
+  font-size: 12px;
+  width: 14rem;
+}
+
+.rmp-compare-table .rmp-compare-delta {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  width: 12rem;
+}
+
+.rmp-delta--worse  { color: #dc3545; font-weight: 600; }
+.rmp-delta--better { color: #198754; font-weight: 600; }

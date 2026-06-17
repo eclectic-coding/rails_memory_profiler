@@ -103,4 +103,76 @@ RSpec.describe "RailsMemoryProfiler::Reports", type: :request do
       expect(response).to have_http_status(:forbidden)
     end
   end
+
+end
+
+RSpec.describe "RailsMemoryProfiler::Comparisons", type: :request do
+  let(:report) do
+    {
+      controller: "posts",
+      action: "index",
+      path: "/posts",
+      method: "GET",
+      allocated_objects: 8_500,
+      retained_objects: 120,
+      duration_ms: 18.4,
+      recorded_at: Time.current
+    }
+  end
+
+  before do
+    RailsMemoryProfiler.reset_config!
+    RailsMemoryProfiler.config.dashboard_enabled = true
+    RailsMemoryProfiler::ReportStore.clear
+  end
+
+  after { RailsMemoryProfiler::ReportStore.clear }
+
+  describe "GET /rails/memory/comparison" do
+    context "with two valid report ids" do
+      let(:id_a) do
+        RailsMemoryProfiler::ReportStore.push(report.merge(path: "/posts"))
+        RailsMemoryProfiler::ReportStore.all.last[:id]
+      end
+      let(:id_b) do
+        RailsMemoryProfiler::ReportStore.push(report.merge(path: "/users", allocated_objects: 20_000))
+        RailsMemoryProfiler::ReportStore.all.last[:id]
+      end
+
+      it "returns 200 HTML" do
+        get "/rails/memory/comparison?ids[]=#{id_a}&ids[]=#{id_b}"
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to include("text/html")
+      end
+
+      it "returns 200 JSON with left and right reports" do
+        get "/rails/memory/comparison?ids[]=#{id_a}&ids[]=#{id_b}",
+            headers: { "Accept" => "application/json" }
+        expect(response).to have_http_status(:ok)
+        data = JSON.parse(response.body)
+        expect(data["left"]["path"]).to eq("/posts")
+        expect(data["right"]["path"]).to eq("/users")
+      end
+    end
+
+    context "with fewer than two valid ids" do
+      it "redirects to reports index when ids are missing" do
+        get "/rails/memory/comparison"
+        expect(response).to redirect_to("/rails/memory/reports")
+      end
+
+      it "redirects when only one valid id is given" do
+        RailsMemoryProfiler::ReportStore.push(report)
+        id = RailsMemoryProfiler::ReportStore.all.first[:id]
+        get "/rails/memory/comparison?ids[]=#{id}&ids[]=nonexistent"
+        expect(response).to redirect_to("/rails/memory/reports")
+      end
+    end
+
+    it "returns 403 when dashboard is disabled" do
+      RailsMemoryProfiler.config.dashboard_enabled = false
+      get "/rails/memory/comparison"
+      expect(response).to have_http_status(:forbidden)
+    end
+  end
 end

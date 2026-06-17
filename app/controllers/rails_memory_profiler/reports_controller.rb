@@ -1,11 +1,5 @@
 module RailsMemoryProfiler
-  class ReportsController < ActionController::Base
-    protect_from_forgery with: :null_session
-    layout "rails_memory_profiler/application"
-    helper RailsMemoryProfiler::ApplicationHelper
-
-    before_action :check_dashboard_enabled
-
+  class ReportsController < BaseController
     SORTABLE_COLUMNS = %w[path controller allocated_objects retained_objects duration_ms recorded_at].freeze
 
     def index
@@ -41,10 +35,6 @@ module RailsMemoryProfiler
       def sorted(reports, sort, direction)
         sorted = reports.sort_by { |r| r[sort.to_sym] || 0 }
         direction == "asc" ? sorted : sorted.reverse
-      end
-
-      def check_dashboard_enabled
-        head :forbidden unless RailsMemoryProfiler.config.dashboard_enabled
       end
   end
 end

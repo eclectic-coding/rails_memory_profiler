@@ -1,8 +1,9 @@
 .rmp-filters {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.75rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75rem;
   padding: 0.6rem 1rem;
   background: var(--surface);
   border-radius: var(--radius);
@@ -56,3 +57,32 @@
 }
 
 .rmp-input-clear:hover { color: var(--text); background: var(--border); }
+
+.rmp-select {
+  font-family: inherit;
+  font-size: 13px;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+}
+
+.rmp-select:focus {
+  outline: none;
+  border-color: #86b7fe;
+  box-shadow: 0 0 0 2px rgba(13,110,253,.15);
+}
+
+.rmp-btn-reset {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.rmp-btn-reset:hover { color: var(--text); background: var(--border); }
