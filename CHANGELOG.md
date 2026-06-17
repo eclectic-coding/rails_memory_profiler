@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `RailsMemoryProfiler.deprecator` — returns a memoized `ActiveSupport::Deprecation` instance scoped to `"RailsMemoryProfiler"` / `"1.0.0"`; use this for any future breaking-change warnings
+
+### Changed
+- `DELETE /store` replaces `DELETE /reports/clear` — store flush is now handled by `StoreController#destroy`, a proper CRUD action on the store resource; `ReportsController` is now index/show only
+
+### Fixed
+- Thread safety: `Engine.mount_path` lazy detection used a non-atomic `||=` on a class ivar; replaced with a dedicated `MOUNT_PATH_MUTEX` (private_constant) and double-checked locking
+- Thread safety: `ReportStore`'s `@mutex ||= Mutex.new` had a bootstrap race before any mutex existed; replaced with a module-level `MUTEX` constant initialized at load time
+
 ## [0.5.0] - 2026-06-17
 
 ### Added
