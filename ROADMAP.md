@@ -9,9 +9,6 @@ The [`memory_profiler`](https://github.com/SamSaffron/memory_profiler) gem is th
 
 ## 0.2.0 — Richer reports
 
-- Full `MemoryProfiler.report` stored per request (opt-in via `config.detailed_reports = true`; has overhead — default: sample every 10th request)
-- Drilldown view with allocation breakdown by gem, file, class, and line
-- Configurable `min_allocated_objects` — skip recording requests below the threshold (reduces noise)
 - Sort + filter by allocated bytes, retained objects, controller, action
 - Request comparison: pin two requests and diff their allocation profiles
 

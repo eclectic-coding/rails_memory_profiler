@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount RailsMemoryProfiler::Engine => "/rails_memory_profiler"
+  mount RailsMemoryProfiler::Engine => "/rails/memory"
 end

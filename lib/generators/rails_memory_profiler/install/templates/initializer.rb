@@ -25,4 +25,11 @@ RailsMemoryProfiler.configure do |config|
 
   # Controllers to skip — matched against the Rails controller name.
   # config.ignore_controllers = ["rails/health", "rails_memory_profiler/reports"]
+
+  # Capture full MemoryProfiler.report breakdowns (by gem, class, file, location).
+  # Requires `gem "memory_profiler"` in your Gemfile. Has significant overhead — use with sampling.
+  # config.detailed_reports = false
+
+  # When detailed_reports is enabled, capture a full report every Nth profiled request.
+  # config.detailed_sample_rate = 10
 end

@@ -1,0 +1,40 @@
+.rmp-breakdowns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.rmp-breakdown {
+  background: var(--rmp-surface);
+  border: 1px solid var(--rmp-border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.rmp-breakdown-title {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--rmp-muted);
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--rmp-border);
+  margin: 0;
+}
+
+.rmp-breakdown .rmp-table {
+  margin: 0;
+  border: none;
+}
+
+.rmp-breakdown .rmp-table th,
+.rmp-breakdown .rmp-table td {
+  padding: 0.4rem 1rem;
+}
+
+.rmp-breakdown .rmp-table td:last-child {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  color: var(--rmp-muted);
+}
