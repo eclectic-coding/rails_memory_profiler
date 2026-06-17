@@ -6,6 +6,8 @@ require "rails_memory_profiler/middleware"
 require "rails_memory_profiler/engine"
 
 module RailsMemoryProfiler
+  class AllocationSpikeError < StandardError; end
+
   class << self
     def configure
       yield config
