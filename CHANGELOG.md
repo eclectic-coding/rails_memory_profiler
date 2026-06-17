@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- `config.detailed_reports` — opt-in full `MemoryProfiler.report` capture per request (default: `false`); requires `gem "memory_profiler"` in the host app's Gemfile (soft dependency — not declared in gemspec)
+- `config.detailed_sample_rate` — capture a detailed report every Nth profiled request when `detailed_reports` is enabled (default: `10`)
+- Show view drilldown — when a report includes detail, the show page renders breakdown tables (allocated/retained by gem, class, file, and location); top 20 entries per table
+- `_06_breakdowns.css` — responsive grid layout for breakdown tables
+
+### Fixed
+- Standardised recommended engine mount path to `/rails/memory` across generator output, README, and dummy app (`/rails_memory_profiler` was the old default)
+- Moved `puma`, `sqlite3`, and `propshaft` to `:development, :test` Gemfile group so the dummy app can be run manually without JS asset routing errors
+
 ## [0.1.0] - 2026-06-16
 
 ### Added

@@ -76,6 +76,8 @@ All options and their defaults:
 | `min_allocated_objects` | `0` | Skip requests that allocate fewer objects than this |
 | `ignore_paths` | `[]` | Paths to skip — strings (prefix) or regexes |
 | `ignore_controllers` | `[]` | Controller names to skip (e.g. `"rails/health"`) |
+| `detailed_reports` | `false` | Capture full `MemoryProfiler.report` breakdowns; requires `gem "memory_profiler"` in your Gemfile |
+| `detailed_sample_rate` | `10` | When `detailed_reports` is enabled, capture a full report every Nth profiled request |
 
 Example:
 
