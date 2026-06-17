@@ -143,6 +143,9 @@ module RailsMemoryProfiler
       end
 
       def ignored_path?(path)
+        mount = RailsMemoryProfiler::Engine.mount_path
+        return true if mount && path.start_with?(mount)
+
         RailsMemoryProfiler.config.ignore_paths.any? do |pattern|
           pattern.is_a?(Regexp) ? pattern.match?(path) : path.start_with?(pattern.to_s)
         end

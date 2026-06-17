@@ -2,6 +2,30 @@
 .rmp-header h1 { font-size: 1.4rem; font-weight: 600; }
 .rmp-header p  { color: var(--muted); margin-top: 0.2rem; }
 
+.rmp-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.rmp-btn-danger {
+  font-family: inherit;
+  font-size: 12px;
+  padding: 0.3rem 0.8rem;
+  border: 1px solid #dc3545;
+  border-radius: var(--radius);
+  background: transparent;
+  color: #dc3545;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.rmp-btn-danger:hover {
+  background: #dc3545;
+  color: #fff;
+}
+
 .rmp-empty   { color: var(--muted); font-style: italic; margin-top: 1rem; }
 .rmp-summary { margin-bottom: 0.5rem; }
 
