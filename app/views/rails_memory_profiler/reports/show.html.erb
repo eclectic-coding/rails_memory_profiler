@@ -30,6 +30,40 @@
       </div>
     </div>
   </div>
+
+  <% if (detail = @report[:detail]) %>
+    <div class="rmp-breakdowns">
+      <% [
+        ["Allocated by Gem",      detail[:allocated_by_gem]],
+        ["Allocated by Class",    detail[:allocated_by_class]],
+        ["Allocated by File",     detail[:allocated_by_file]],
+        ["Allocated by Location", detail[:allocated_by_location]],
+        ["Retained by Gem",       detail[:retained_by_gem]],
+        ["Retained by Class",     detail[:retained_by_class]],
+      ].each do |title, stats| %>
+        <% next if stats.blank? %>
+        <div class="rmp-breakdown">
+          <h2 class="rmp-breakdown-title"><%= title %></h2>
+          <table class="rmp-table">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Count</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% stats.first(20).each do |stat| %>
+                <tr>
+                  <td><%= stat[:name] %></td>
+                  <td><%= number_with_delimiter(stat[:count]) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
 <% else %>
   <p class="rmp-empty">Report not found — it may have been evicted from the store.</p>
 <% end %>

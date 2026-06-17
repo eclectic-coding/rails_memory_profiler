@@ -99,5 +99,68 @@ RSpec.describe RailsMemoryProfiler::Middleware do
         expect(RailsMemoryProfiler::ReportStore.size).to eq(1)
       end
     end
+
+    context "with detailed_reports" do
+      before do
+        RailsMemoryProfiler.config.detailed_reports     = true
+        RailsMemoryProfiler.config.detailed_sample_rate = 1
+      end
+
+      it "stores allocated and retained object counts" do
+        middleware.call(env_for)
+
+        report = RailsMemoryProfiler::ReportStore.all.first
+        expect(report[:allocated_objects]).to be_a(Integer)
+        expect(report[:retained_objects]).to be >= 0
+      end
+
+      it "stores a detail hash with breakdown arrays keyed by category" do
+        middleware.call(env_for)
+
+        detail = RailsMemoryProfiler::ReportStore.all.first[:detail]
+        expect(detail).to be_a(Hash)
+        %i[allocated_by_gem allocated_by_file allocated_by_class allocated_by_location
+           retained_by_gem retained_by_file retained_by_class retained_by_location].each do |key|
+          expect(detail).to have_key(key)
+          expect(detail[key]).to be_an(Array)
+        end
+      end
+
+      it "serializes each breakdown entry as {name:, count:}" do
+        middleware.call(env_for)
+
+        detail = RailsMemoryProfiler::ReportStore.all.first[:detail]
+        nonempty = detail.values.find(&:any?)
+        expect(nonempty.first).to include(:name, :count)
+      end
+
+      it "does not include detail on basic (non-detailed) reports" do
+        RailsMemoryProfiler.config.detailed_reports = false
+        middleware.call(env_for)
+
+        report = RailsMemoryProfiler::ReportStore.all.first
+        expect(report).not_to have_key(:detail)
+      end
+
+      it "raises a helpful LoadError when memory_profiler is not installed" do
+        allow(middleware).to receive(:require).with("memory_profiler").and_raise(LoadError)
+
+        expect { middleware.send(:require_memory_profiler!) }.to raise_error(
+          LoadError, /Add `gem 'memory_profiler'`/
+        )
+      end
+
+      context "with detailed_sample_rate" do
+        it "only captures detailed reports every Nth profiled request" do
+          RailsMemoryProfiler.config.detailed_sample_rate = 3
+
+          5.times { middleware.call(env_for) }
+
+          reports = RailsMemoryProfiler::ReportStore.all
+          expect(reports.count { |r| r.key?(:detail) }).to eq(1)
+          expect(reports.count { |r| !r.key?(:detail) }).to eq(4)
+        end
+      end
+    end
   end
 end

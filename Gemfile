@@ -8,6 +8,7 @@ group :development do
 end
 
 group :test do
+  gem "memory_profiler"
   gem "puma"
   gem "sqlite3"
   gem "propshaft"

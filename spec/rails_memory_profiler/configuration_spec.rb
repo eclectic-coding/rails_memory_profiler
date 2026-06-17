@@ -11,6 +11,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
     it { expect(config.min_allocated_objects).to eq(0) }
     it { expect(config.ignore_paths).to eq([]) }
     it { expect(config.ignore_controllers).to eq([]) }
+    it { expect(config.detailed_reports).to be(false) }
+    it { expect(config.detailed_sample_rate).to eq(10) }
   end
 
   describe "assignment" do
@@ -22,6 +24,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
       config.min_allocated_objects = 500
       config.ignore_paths          = ["/health"]
       config.ignore_controllers    = ["rails_memory_profiler/reports"]
+      config.detailed_reports      = true
+      config.detailed_sample_rate  = 5
 
       expect(config.enabled).to be(true)
       expect(config.sample_rate).to eq(10)
@@ -30,6 +34,8 @@ RSpec.describe RailsMemoryProfiler::Configuration do
       expect(config.min_allocated_objects).to eq(500)
       expect(config.ignore_paths).to eq(["/health"])
       expect(config.ignore_controllers).to eq(["rails_memory_profiler/reports"])
+      expect(config.detailed_reports).to be(true)
+      expect(config.detailed_sample_rate).to eq(5)
     end
   end
 end
