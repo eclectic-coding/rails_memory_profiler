@@ -74,7 +74,7 @@ All options and their defaults:
 | `store_size` | `100` | Max reports in the ring buffer; oldest are evicted when full |
 | `dashboard_enabled` | `true` in development | Enable the dashboard endpoint |
 | `min_allocated_objects` | `0` | Skip requests that allocate fewer objects than this |
-| `ignore_paths` | `[]` | Paths to skip — strings (prefix) or regexes |
+| `ignore_paths` | `[]` | Additional paths to skip — strings (prefix) or regexes (the dashboard's own mount path is auto-ignored) |
 | `ignore_controllers` | `[]` | Controller names to skip (e.g. `"rails/health"`) |
 | `detailed_reports` | `false` | Capture full `MemoryProfiler.report` breakdowns; requires `gem "memory_profiler"` in your Gemfile |
 | `detailed_sample_rate` | `10` | When `detailed_reports` is enabled, capture a full report every Nth profiled request |
@@ -88,7 +88,7 @@ Example:
 RailsMemoryProfiler.configure do |config|
   config.sample_rate           = 5
   config.min_allocated_objects = 1_000
-  config.ignore_paths          = ["/rails/memory", "/up"]
+  config.ignore_paths          = ["/up"]   # dashboard mount path is auto-ignored
   config.ignore_controllers    = ["rails/health"]
   config.notifiers             = [RailsMemoryProfiler::Notifiers::Console.new]
   config.log_file              = Rails.root.join("log/memory_profiler.jsonl")

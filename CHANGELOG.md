@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- Auto-ignore dashboard mount path — `Engine.mount_path` lazily detects where the engine is mounted and the middleware skips those requests automatically; no configuration needed
+- `DELETE /reports/clear` — flushes the in-memory ring buffer without a server restart; "Clear All" button appears in the dashboard header when reports are present (guarded by a confirm dialog)
+
 ## [0.4.0] - 2026-06-17
 
 ### Added
