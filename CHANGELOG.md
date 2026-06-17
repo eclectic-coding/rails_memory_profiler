@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2026-06-17
+
 ### Added
 - `config.detailed_reports` — opt-in full `MemoryProfiler.report` capture per request (default: `false`); requires `gem "memory_profiler"` in the host app's Gemfile (soft dependency — not declared in gemspec)
 - `config.detailed_sample_rate` — capture a detailed report every Nth profiled request when `detailed_reports` is enabled (default: `10`)
@@ -42,5 +44,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - README rewritten with installation, mount, configuration table, and dashboard description
 - Gemspec: `homepage`, `summary`, `description`, `source_code_uri`, `changelog_uri` filled in; `required_ruby_version >= 3.3` set; `importmap-rails` and `turbo-rails` added as runtime dependencies; `allowed_push_host` guard removed
 
-[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.1.0...HEAD
+[Unreleased]: https://github.com/eclectic-coding/rails_memory_profiler/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.2.0
 [0.1.0]: https://github.com/eclectic-coding/rails_memory_profiler/releases/tag/v0.1.0
