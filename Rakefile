@@ -13,4 +13,10 @@ RuboCop::RakeTask.new(:lint)
 Bundler::Audit::Task.new
 RSpec::Core::RakeTask.new(:spec)
 
-task default: [:lint, :'bundle:audit:update', 'bundle:audit:check', :spec]
+desc "Run Brakeman against the engine (dummy app excluded)"
+task :brakeman do
+  sh "bundle exec brakeman -q --no-pager --force-scan --skip-files spec/ " \
+     "-i config/brakeman.ignore --ensure-ignore-notes ."
+end
+
+task default: [:lint, :'bundle:audit:update', 'bundle:audit:check', :brakeman, :spec]

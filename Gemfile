@@ -5,6 +5,7 @@ gemspec
 group :development do
   gem "rubocop-rails-omakase", require: false
   gem "bundler-audit"
+  gem "brakeman", require: false
 end
 
 group :development, :test do

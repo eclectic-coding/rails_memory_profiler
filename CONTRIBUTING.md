@@ -7,9 +7,11 @@ Bug reports and pull requests are welcome on [GitHub](https://github.com/eclecti
 ```bash
 git clone https://github.com/eclectic-coding/rails_memory_profiler.git
 cd rails_memory_profiler
-bundle install
-bundle exec rake          # lint → security audit → specs
+bin/setup                 # bundle install + enables the pre-push hook
+bundle exec rake          # lint → security audit → Brakeman → specs
 ```
+
+`bin/setup` sets `core.hooksPath` to `.githooks`, so `bundle exec rake` runs before every push. Bypass in an emergency with `git push --no-verify`.
 
 ## Workflow
 
